@@ -1,0 +1,21 @@
+{
+    "name": "hasher-mtp",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": {
+        "name": "JCThePants"
+    },
+    "homepage": "https://github.com/MintPond/node-hasher-mtp",
+    "bugs": {
+        "url": "https://github.com/MintPond/node-hasher-mtp/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/MintPond/node-hasher-mtp.git"
+    },
+    "dependencies": {
+        "bindings": "^1.3.0",
+        "nan": "^2.6.2"
+    },
+    "keywords": ["mtp", "zcoin", "hash", "verify"]
+}
