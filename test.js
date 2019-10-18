@@ -33,18 +33,18 @@ function findNonce(mtpHeader, target) {
     const result = mtp.hash(mtpHeader, target, nonceStart, nonceEnd);
     const endTime = Date.now();
 
-    console.log('Find nonce complete: ' + (endTime - startTime) + 'ms');
-    console.log('nonce      = ' + result.nonce.readUInt32LE(0));
-    console.log('nonce hex  = ' + result.nonce.toString('hex'));
-    console.log('hash/sec   = ' + (result.nonce.readUInt32LE(0) / (endTime - startTime) * 1000));
+    console.log(`Find nonce complete: ${endTime - startTime}ms`);
+    console.log(`nonce      = ${result.nonce.readUInt32LE(0)}`);
+    console.log(`nonce hex  = ${result.nonce.toString('hex')}`);
+    console.log(`hash/sec   = ${result.nonce.readUInt32LE(0) / (endTime - startTime) * 1000}`);
 
     if (!result) {
         console.log('No valid nonce found');
         return false;
     }
 
-    console.log('block size = ' + result.block.length);
-    console.log('proof size = ' + result.proof.length);
+    console.log(`block size = ${result.block.length}`);
+    console.log(`proof size = ${result.proof.length}`);
 
     return result;
 }
@@ -52,7 +52,7 @@ function findNonce(mtpHeader, target) {
 
 function verify(mtpHeader, hashResult, iterations) {
 
-    console.log('Verifying with ' + iterations + ' iterations...');
+    console.log(`Verifying with ${iterations} iterations...`);
 
     const mtpHashValue = Buffer.alloc(32);
     const startTimeMs = Date.now();
@@ -65,8 +65,8 @@ function verify(mtpHeader, hashResult, iterations) {
     }
     const endTimeMs = Date.now();
     const verifyPs = iterations / (endTimeMs - startTimeMs) * 1000;
-    console.log('verify/sec = ' + verifyPs);
-    console.log('hashValue  = ' + mtpHashValue.toString('hex'));
+    console.log(`verify/sec = ${verifyPs}`);
+    console.log(`hashValue  = ${mtpHashValue.toString('hex')}`);
 }
 
 function uint256BufferFromHash(hex) {

@@ -2,9 +2,36 @@ node-hasher-mtp
 ===============
 
 This is a Node module for simple hashing and verifying inputs using the
-MTP (Merkle Tree Proof) proof-of-work algorithm as implemented by [Zcoin](https://zcoin.io).
+MTP (Merkle Tree Proof) proof-of-work algorithm as implemented by [Zcoin](https://zcoin.io). 
+Most of the native code comes from or is adapted from [Zcoin code](https://github.com/zcoinofficial/zcoin) 
+or the [djm34 cpuminer](https://github.com/zcoinofficial/cpuminer).
 
-This module has been developed and tested on [Node v8.12](https://nodejs.org/) and [Ubuntu 16.04](http://releases.ubuntu.com/16.04/)
+This module has been developed and tested on [Node v10.16.3](https://nodejs.org/) and [Ubuntu 16.04](http://releases.ubuntu.com/16.04/)
+
+## Install ##
+__Install as Dependency in NodeJS Project__
+```bash
+sudo apt-get install build-essential
+npm install git://github.com/MintPond/node-hasher-mtp --save
+```
+
+__Install & Test__
+```bash
+# Install nodejs v10
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install nodejs -y
+
+# Download node-hasher-mtp
+git clone https://github.com/MintPond/node-hasher-mtp
+
+# build
+cd node-hasher-mtp
+sudo apt-get install build-essential
+npm install
+
+# test (requires 6GB of memory)
+node test
+``` 
 
 ## Usage ##
 __Hash__
@@ -14,6 +41,8 @@ const mtp = require('hasher-mtp');
 /**
  * Solve the hash problem. This function will try different nonce until it finds one such that the
  * computed hash is less than the `target` difficulty.
+ * 
+ * A minimum of 6GB of free memory is required.
  *
  * @param  mtpInput   {Buffer}  80-byte header data to hash
  * @param  target     {Buffer}  32-byte target
@@ -41,10 +70,7 @@ const mtp = require('hasher-mtp');
 const hashValueOut = Buffer.alloc(32);
 
 /**
- * Verify the given input and proofs are valid.
- *
- * This function verifies that the provided `nonce` does produce a hash value
- * that is less than `target`.
+ * This function verifies that the provided proofs are valid and returns the hash value.
  *
  * @param mtpInput     {Buffer}  80-byte header that was hashed.
  * @param nonce        {Buffer}  4-byte nonce to check.
@@ -66,10 +92,7 @@ else {
 ```
 
 ## Dependencies ##
-The Boost library is used.
-
 In Ubuntu:
 ```
    sudo apt-get install build-essential
-   sudo apt-get install libboost-system-dev
 ```
