@@ -103,11 +103,11 @@ NAN_METHOD(hash) {
             return THROW_ERROR_EXCEPTION("hasher-mtp.hash - 5 arguments expected.");
         }
 
-        uint32_t* header_ptr = (uint32_t *)Buffer::Data(info[0]->ToObject());
-        char* target_ptr = (char*)Buffer::Data(info[1]->ToObject());
-        char* nonce_start_ptr = (char*)Buffer::Data(info[2]->ToObject());
-        char* nonce_end_ptr = (char*)Buffer::Data(info[3]->ToObject());
-        char* output_ptr = (char*)Buffer::Data(info[4]->ToObject());
+        uint32_t* header_ptr = (uint32_t *)Buffer::Data(Nan::To<v8::Object>(info[0]).ToLocalChecked());
+        char* target_ptr = (char*)Buffer::Data(Nan::To<v8::Object>(info[1]).ToLocalChecked());
+        char* nonce_start_ptr = (char*)Buffer::Data(Nan::To<v8::Object>(info[2]).ToLocalChecked());
+        char* nonce_end_ptr = (char*)Buffer::Data(Nan::To<v8::Object>(info[3]).ToLocalChecked());
+        char* output_ptr = (char*)Buffer::Data(Nan::To<v8::Object>(info[4]).ToLocalChecked());
 
         uint256 target;
         uint256 hash_value;
@@ -222,9 +222,9 @@ NAN_METHOD(hash_one) {
         if (info.Length() < 3)
             return THROW_ERROR_EXCEPTION("hasher-mtp.hash_one - 3 arguments expected.");
 
-        uint32_t* header_ptr = (uint32_t *)Buffer::Data(info[0]->ToObject());
-        char* nonce_ptr = (char*)Buffer::Data(info[1]->ToObject());
-        char* output_ptr = (char*)Buffer::Data(info[2]->ToObject());
+        uint32_t* header_ptr = (uint32_t *)Buffer::Data(Nan::To<v8::Object>(info[0]).ToLocalChecked());
+        char* nonce_ptr = (char*)Buffer::Data(Nan::To<v8::Object>(info[1]).ToLocalChecked());
+        char* output_ptr = (char*)Buffer::Data(Nan::To<v8::Object>(info[2]).ToLocalChecked());
 
         uint256 hash_value;
 
@@ -317,12 +317,12 @@ NAN_METHOD(verify) {
         if (info.Length() < 6)
             return THROW_ERROR_EXCEPTION("hasher-mtp.verify - 6 arguments expected.");
 
-        char* input_ptr = (char*)Buffer::Data(info[0]->ToObject());
-        unsigned char* nonce_ptr = (unsigned char*)Buffer::Data(info[1]->ToObject());
-        unsigned char* hash_root_ptr = (unsigned char*)Buffer::Data(info[2]->ToObject());
-        unsigned char* block_ptr = (unsigned char*)Buffer::Data(info[3]->ToObject());
-        unsigned char* proof_ptr = (unsigned char*)Buffer::Data(info[4]->ToObject());
-        unsigned char* hash_value_out_ptr = (unsigned char*)Buffer::Data(info[5]->ToObject());
+        char* input_ptr = (char*)Buffer::Data(Nan::To<v8::Object>(info[0]).ToLocalChecked());
+        unsigned char* nonce_ptr = (unsigned char*)Buffer::Data(Nan::To<v8::Object>(info[1]).ToLocalChecked());
+        unsigned char* hash_root_ptr = (unsigned char*)Buffer::Data(Nan::To<v8::Object>(info[2]).ToLocalChecked());
+        unsigned char* block_ptr = (unsigned char*)Buffer::Data(Nan::To<v8::Object>(info[3]).ToLocalChecked());
+        unsigned char* proof_ptr = (unsigned char*)Buffer::Data(Nan::To<v8::Object>(info[4]).ToLocalChecked());
+        unsigned char* hash_value_out_ptr = (unsigned char*)Buffer::Data(Nan::To<v8::Object>(info[5]).ToLocalChecked());
 
         // hash root
         uint8_t hash_root[16];
@@ -380,11 +380,11 @@ NAN_METHOD(verify_fast) {
         if (info.Length() < 5)
             return THROW_ERROR_EXCEPTION("hasher-mtp.verify_fast - 5 arguments expected.");
 
-        char* input_ptr = (char*)Buffer::Data(info[0]->ToObject());
-        unsigned char* nonce_ptr = (unsigned char*)Buffer::Data(info[1]->ToObject());
-        unsigned char* hash_root_ptr = (unsigned char*)Buffer::Data(info[2]->ToObject());
-        unsigned char* block_ptr = (unsigned char*)Buffer::Data(info[3]->ToObject());
-        unsigned char* hash_value_out_ptr = (unsigned char*)Buffer::Data(info[4]->ToObject());
+        char* input_ptr = (char*)Buffer::Data(Nan::To<v8::Object>(info[0]).ToLocalChecked());
+        unsigned char* nonce_ptr = (unsigned char*)Buffer::Data(Nan::To<v8::Object>(info[1]).ToLocalChecked());
+        unsigned char* hash_root_ptr = (unsigned char*)Buffer::Data(Nan::To<v8::Object>(info[2]).ToLocalChecked());
+        unsigned char* block_ptr = (unsigned char*)Buffer::Data(Nan::To<v8::Object>(info[3]).ToLocalChecked());
+        unsigned char* hash_value_out_ptr = (unsigned char*)Buffer::Data(Nan::To<v8::Object>(info[4]).ToLocalChecked());
 
         // hash root
         uint8_t hash_root[16];
