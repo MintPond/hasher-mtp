@@ -50,7 +50,7 @@ static __inline int setpriority(int which, int who, int prio)
 #define __func__ __FUNCTION__
 #define __thread __declspec(thread)
 #define _ALIGN(x) __declspec(align(x))
-typedef int ssize_t;
+// typedef int ssize_t;
 
 __inline int msver(void) {
 	switch (_MSC_VER) {

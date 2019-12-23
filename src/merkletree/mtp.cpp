@@ -9,7 +9,7 @@
 #include "argon2ref/blake2-impl.h"
 #include "argon2ref/blake2.h"
 
-#ifdef _MSC_VERs
+#ifdef _MSC_VER
 #include <windows.h>
 #include <winbase.h> /* For SecureZeroMemory */
 #endif
