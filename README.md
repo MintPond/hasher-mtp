@@ -1,5 +1,5 @@
-node-hasher-mtp
-===============
+hasher-mtp
+==========
 
 This is a Node module for simple hashing and verifying inputs using the
 MTP (Merkle Tree Proof) proof-of-work algorithm as implemented by [Zcoin](https://zcoin.io). 
@@ -11,8 +11,20 @@ This module has been developed and tested on [Node v10.16.3](https://nodejs.org/
 ## Install ##
 __Install as Dependency in NodeJS Project__
 ```bash
+# Install from Github git package
+
 sudo apt-get install build-essential
-npm install git://github.com/MintPond/node-hasher-mtp --save
+npm install mintpond/hasher-mtp --save
+```
+-or-
+```bash
+# Install from Github NPM repository
+
+sudo apt-get install build-essential
+npm config set @mintpond:registry https://npm.pkg.github.com/mintpond
+npm config set //npm.pkg.github.com/:_authToken <MY_GITHUB_AUTH_TOKEN>
+
+npm install @mintpond/hasher-mtp@1.1.1 --save
 ```
 
 __Install & Test__
@@ -21,16 +33,16 @@ __Install & Test__
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install nodejs -y
 
-# Download node-hasher-mtp
-git clone https://github.com/MintPond/node-hasher-mtp
+# Download hasher-mtp
+git clone https://github.com/MintPond/hasher-mtp
 
 # build
-cd node-hasher-mtp
+cd hasher-mtp
 sudo apt-get install build-essential
 npm install
 
-# test (requires 6GB of memory)
-node test
+# test (requires 6GB of free memory)
+npm test
 ``` 
 
 ## Usage ##
