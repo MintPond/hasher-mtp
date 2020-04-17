@@ -11,79 +11,6 @@
 using namespace node;
 using namespace v8;
 
-#if ((__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 3))
-#define WANT_BUILTIN_BSWAP
-#else
-#define bswap_32(x) ((((x) << 24) & 0xff000000u) | (((x) << 8) & 0x00ff0000u) \
-                   | (((x) >> 8) & 0x0000ff00u) | (((x) >> 24) & 0x000000ffu))
-#endif
-
-static inline uint32_t swab32(uint32_t v)
-{
-#ifdef WANT_BUILTIN_BSWAP
-    return __builtin_bswap32(v);
-#else
-    return bswap_32(v);
-#endif
-}
-
-#if !HAVE_DECL_BE32DEC
-static inline uint32_t be32dec(const void *pp)
-{
-    const uint8_t *p = (uint8_t const *)pp;
-    return ((uint32_t)(p[3]) + ((uint32_t)(p[2]) << 8) +
-            ((uint32_t)(p[1]) << 16) + ((uint32_t)(p[0]) << 24));
-}
-#endif
-
-#if !HAVE_DECL_LE32DEC
-static inline uint32_t le32dec(const void *pp)
-{
-    const uint8_t *p = (uint8_t const *)pp;
-    return ((uint32_t)(p[0]) + ((uint32_t)(p[1]) << 8) +
-            ((uint32_t)(p[2]) << 16) + ((uint32_t)(p[3]) << 24));
-}
-#endif
-
-#if !HAVE_DECL_BE32ENC
-static inline void be32enc(void *pp, uint32_t x)
-{
-    uint8_t *p = (uint8_t *)pp;
-    p[3] = x & 0xff;
-    p[2] = (x >> 8) & 0xff;
-    p[1] = (x >> 16) & 0xff;
-    p[0] = (x >> 24) & 0xff;
-}
-#endif
-
-#if !HAVE_DECL_LE32ENC
-static inline void le32enc(void *pp, uint32_t x)
-{
-    uint8_t *p = (uint8_t *)pp;
-    p[0] = x & 0xff;
-    p[1] = (x >> 8) & 0xff;
-    p[2] = (x >> 16) & 0xff;
-    p[3] = (x >> 24) & 0xff;
-}
-#endif
-
-#if !HAVE_DECL_LE16DEC
-static inline uint16_t le16dec(const void *pp)
-{
-    const uint8_t *p = (uint8_t const *)pp;
-    return ((uint16_t)(p[0]) + ((uint16_t)(p[1]) << 8));
-}
-#endif
-
-#if !HAVE_DECL_LE16ENC
-static inline void le16enc(void *pp, uint16_t x)
-{
-    uint8_t *p = (uint8_t *)pp;
-    p[0] = x & 0xff;
-    p[1] = (x >> 8) & 0xff;
-}
-#endif
-
 #define THROW_ERROR_EXCEPTION(x) Nan::ThrowError(x)
 
 namespace {
@@ -116,8 +43,6 @@ NAN_METHOD(hash) {
         std::memcpy(target.begin(), target_ptr, target.size());
 
         // proofs
-        uint8_t hash_root[16];
-        uint64_t block[L*2][128];
         std::deque<std::vector<uint8_t>> proof[L * 3];
 
         uint32_t nonce_start = *(uint32_t*)nonce_start_ptr;
@@ -125,7 +50,6 @@ NAN_METHOD(hash) {
 
         uint64_t hashes_done = 0;
 
-        struct timeval tv_start, tv_end, timediff;
         unsigned char merkle_root[16];
         unsigned char hash[32];
 
@@ -229,15 +153,12 @@ NAN_METHOD(hash_one) {
         uint256 hash_value;
 
         // proofs
-        uint8_t hash_root[16];
-        uint64_t block[L*2][128];
         std::deque<std::vector<uint8_t>> proof[L * 3];
 
         uint32_t nonce = *(uint32_t*)nonce_ptr;
 
         uint64_t hashes_done = 0;
 
-        struct timeval tv_start, tv_end, timediff;
         unsigned char merkle_root[16];
         unsigned char hash[32];
 

@@ -997,8 +997,8 @@ namespace mtp {
                 compute_blake2b(instance->memory[i], digest);
                 elements.emplace_back(digest, digest + sizeof(digest));
             }
-
-            return elements;
         }
+
+        return elements;
     }
 }
