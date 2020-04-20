@@ -6,7 +6,8 @@ MTP (Merkle Tree Proof) proof-of-work algorithm as implemented by [Zcoin](https:
 Most of the native code comes from or is adapted from [Zcoin code](https://github.com/zcoinofficial/zcoin) 
 or the [djm34 cpuminer](https://github.com/zcoinofficial/cpuminer).
 
-This module has been developed and tested on [Node v10.16.3](https://nodejs.org/) and [Ubuntu 16.04](http://releases.ubuntu.com/16.04/)
+This module has been developed and tested on [Node v10.16.3](https://nodejs.org/) and 
+[Ubuntu 16.04](http://releases.ubuntu.com/16.04/) for the [Zcoin mining pool](https://mintpond.com/#!/zcoin) at [MintPond](https://mintpond.com).
 
 ## Install ##
 __Install as Dependency in NodeJS Project__
